@@ -8,7 +8,7 @@ include("funcs.php");  //funcs.phpを読み込む（関数群）
 $pdo = db_conn();      //DB接続関数
 
 //２．データ登録SQL作成
-$stmt   = $pdo->prepare("SELECT * FROM gs_an_table WHERE id=:id"); //SQLをセット
+$stmt   = $pdo->prepare("SELECT * FROM ib_canvas WHERE id=:id"); //SQLをセット
 $stmt->bindValue(':id', $id, PDO::PARAM_INT); //idは数値なのでINT
 $status = $stmt->execute(); //SQLを実行→エラーの場合falseを$statusに代入
 
@@ -53,21 +53,31 @@ $row=$stmt->fetch();
   <!-- Head[End] -->
 
   <!-- Main[Start] -->
-  <form method="POST" action="update.php">
-  <div class="jumbotron">
-   <fieldset>
-    <legend>フリーアンケート</legend>
-     <label>名前：<input type="text" name="name" value="<?=$row["name"]?>"></label><br>
-     <label>Email：<input type="text" name="email" value="<?=$row["email"]?>"></label><br>
-     <label>年齢：<input type="text" name="age" value="<?=$row["age"]?>"></label><br>
-     <label><textArea name="naiyou" rows="4" cols="40"><?=$row["naiyou"]?></textArea></label><br>
-     <!-- idを隠して送信 -->
-     <input type="hidden" name="id" value="<?=$row["id"]?>">
-     <!-- idを隠して送信 -->
-     <input type="submit" value="送信">
-    </fieldset>
+<div class="canvas">
+    <form method="POST" action="update.php">
+      <label>アイデア名：<input type="text" name="name"></label>
+      <table>
+        <tbody>
+          <tr>
+          <td rowspan="2"><label>主なパートナー：<input type="text" name="partnership" value="<?=$row["partnership"]?>"></label></td>
+            <td><label>主な活動：<input type="text" name="activity" value="<?=$row["activity"]?>"></label></td>
+            <td colspan="2" rowspan="2"><label>価値提案：<input type="text" name="proposition" value="<?=$row["proposition"]?>"></label></td>
+            <td><label>顧客との関係：<input type="text" name="relationship" value="<?=$row["relationship"]?>"></label></td>
+            <td rowspan="2"><label>顧客セグメント：<input type="text" name="segment" value="<?=$row["segment"]?>"></label></td>
+          </tr>
+          <tr>
+            <td><label>主なリソース：<input type="text" name="resource" value="<?=$row["resource"]?>"></label></td>
+            <td><label>チャネル：<input type="text" name="channel" value="<?=$row["channel"]?>"></label></td>
+          </tr>
+          <tr>
+            <td colspan="3"><label>コスト構造：<input type="text" name="cost" value="<?=$row["cost"]?>"></label></td>
+            <td colspan="3"><label>収益の流れ：<input type="text" name="stream" value="<?=$row["stream"]?>"></label></td>
+        </tbody>
+      </table>
+      <input type="submit" value="保存">
+    </form>
   </div>
-</form>
+
   <!-- Main[End] -->
 
 

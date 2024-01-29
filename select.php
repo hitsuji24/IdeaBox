@@ -3,7 +3,7 @@ include("funcs.php");  //funcs.phpを読み込む（関数群）
 $pdo = db_conn();      //DB接続関数
 
 //２．データ登録SQL作成
-$stmt   = $pdo->prepare("SELECT * FROM gs_an_table"); //SQLをセット
+$stmt   = $pdo->prepare("SELECT * FROM ib_canvas"); //SQLをセット
 $status = $stmt->execute(); //SQLを実行→エラーの場合falseを$statusに代入
 
 //３．データ表示
@@ -16,7 +16,7 @@ if($status==false) {
   while( $r = $stmt->fetch(PDO::FETCH_ASSOC)){ //データ取得数分繰り返す
     //以下でリンクの文字列を作成, $r["id"]でidをdetail.phpに渡しています
     $view .= '<a href="detail.php?id='.h($r["id"]).'">';
-    $view .= h($r["id"])."|".h($r["name"])."|".h($r["email"]);
+    $view .= h($r["id"])."|".h($r["ideaName"])."|".h($r["segment"])."|".h($r["partner"])."|".h($r["activity"])."|".h($r["resource"])."|".h($r["channel"])."|".h($r["value"])."|".h($r["customer"])."|".h($r["cost"])."|".h($r["revenue"])."<br>";
     $view .= '</a>';
 
     $view .= '<a href="delete.php?id='.h($r["id"]).'">';

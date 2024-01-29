@@ -1,9 +1,15 @@
 <?php
 //1. POSTデータ取得
-$name   = $_POST["name"];
-$email  = $_POST["email"];
-$naiyou = $_POST["naiyou"];
-$age    = $_POST["age"]; //追加されています
+$ideaName = $_POST["ideaName"];
+$segment = $_POST["segment"];
+$partner = $_POST["partner"];
+$activity = $_POST["activity"];
+$resource = $_POST["resource"];
+$channel = $_POST["channel"];
+$proposition = $_POST["proposition"];
+$relationship = $_POST["relationship"];
+$cost = $_POST["cost"];
+$stream = $_POST["stream"];
 
 //*** 外部ファイルを読み込む ***
 include("funcs.php");
@@ -23,25 +29,31 @@ $pdo = db_conn();
 
 
 //３．データ登録SQL作成
-$stmt = $pdo->prepare("INSERT INTO gs_an_table(name,email,age,naiyou,indate)VALUES(:name,:email,:age,:naiyou,sysdate())");
-$stmt->bindValue(':name',  $name,   PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
-$stmt->bindValue(':email', $email,  PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
-$stmt->bindValue(':age',   $age,    PDO::PARAM_INT);  //Integer（数値の場合 PDO::PARAM_INT)
-$stmt->bindValue(':naiyou',$naiyou, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
+$stmt = $pdo->prepare("INSERT INTO ib_canvas( ideaName, segment, proposition, channel, relationship, stream, resource, activity, cost, partner) VALUES( :ideaName, :segment, :proposition, :channel, :relationship, :stream, :resource, :activity, :cost, :partner)");
+
+$stmt->bindValue(':ideaName', $ideaName, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
+$stmt->bindValue(':segment', $segment, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
+$stmt->bindValue(':proposition', $proposition, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
+$stmt->bindValue(':channel', $channel, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
+$stmt->bindValue(':relationship', $relationship, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
+$stmt->bindValue(':stream', $stream, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
+$stmt->bindValue(':resource', $resource, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
+$stmt->bindValue(':activity', $activity, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
+$stmt->bindValue(':cost', $cost, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
+$stmt->bindValue(':partner', $partner, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
+
 $status = $stmt->execute(); //実行
 
 
 //４．データ登録処理後
-if($status==false){
+if ($status == false) {
     //*** function化を使う！*****************
     // $error = $stmt->errorInfo();
     // exit("SQLError:".$error[2]);
     sql_error($stmt);
-}else{
+} else {
     //*** function化を使う！*****************
     // header("Location: index.php");
     // exit();
     redirect("index.php");
 }
-
-?>
