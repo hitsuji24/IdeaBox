@@ -1,58 +1,55 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
   <meta charset="UTF-8">
   <title>データ登録</title>
-  <link  rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
 
-<!-- Head[Start] -->
-<header>
-  <nav class="navbar navbar-default">
-    <div class="container-fluid">
-    <div class="navbar-header"><a class="navbar-brand" href="select.php">データ一覧</a></div>
-    </div>
-  </nav>
-</header>
-<!-- Head[End] -->
+  <!-- Head[Start] -->
+  <header>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header"><a class="navbar-brand" href="select.php">データ一覧</a></div>
+      </div>
+    </nav>
+  </header>
+  <!-- Head[End] -->
 
-<!-- Main[Start] -->
-<!-- <form method="POST" action="insert.php">
-  <div class="jumbotron">
-   <fieldset>
-    <legend>フリーアンケート</legend>
-     <label>名前：<input type="text" name="name"></label><br>
-     <label>Email：<input type="text" name="email"></label><br>
-     <label>年齢：<input type="text" name="age"></label><br>
-     <label><textArea name="naiyou" rows="4" cols="40"></textArea></label><br>
-     <input type="submit" value="送信">
-    </fieldset>
+  <!-- Main[Start] -->
+  <!--  ビジネスモデルキャンバスの書き込みフォーマット-->
+
+  <div class="canvas">
+    <form method="POST" action="insert.php">
+      <label>アイデア名：<input type="text" name="name"></label>
+      <table>
+        <tbody>
+          <tr>
+            <td rowspan="2"><label>主なパートナー：<input type="text" name="name"></label></td>
+            <td><label>主な活動：<input type="text" name="name"></label></td>
+            <td colspan="2" rowspan="2"><label>価値提案：<input type="text" name="name"></label></td>
+            <td><label>顧客との関係：<input type="text" name="name"></label></td>
+            <td rowspan="2"><label>顧客セグメント：<input type="text" name="name"></label></td>
+          </tr>
+          <tr>
+            <td><label>主なリソース：<input type="text" name="name"></label></td>
+            <td><label>チャネル：<input type="text" name="name"></label></td>
+          </tr>
+          <tr>
+            <td colspan="3"><label>コスト構造：<input type="text" name="name"></label></td>
+            <td colspan="3"><label>収益の流れ：<input type="text" name="name"></label></td>
+          </tr>
+        </tbody>
+      </table>
+      <input type="submit" value="保存">
+    </form>
   </div>
-</form> -->
-
-<!--  ビジネスモデルキャンバスの書き込みフォーマットを用意する-->
-<table>
-	<tbody>
-		<tr>
-			<td rowspan="2"></td>
-			<td></td>
-			<td rowspan="2"></td>
-			<td></td>
-			<td rowspan="2"></td>
-		</tr>
-		<tr>
-			<td></td>
-			<td></td>
-		</tr>
-		<tr>
-			<td colspan="3"></td>
-			<td colspan="2"></td>
-		</tr>
-	</tbody>
-</table>
-<!-- Main[End] -->
+  <!-- Main[End] -->
 
 
 </body>
+
 </html>
