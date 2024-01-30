@@ -24,14 +24,14 @@
   <div class="canvas">
     <form method="POST" action="insert.php">
       <table>
-      <label>アイデア名：<input type="text" name="ideaName"></label>
         <tbody>
+        <label>アイデア名：<input type="text" name="ideaName"></label>
           <tr>
             <td rowspan="2"><label>主なパートナー：<input type="text" name="partner"></label></td>
             <td><label>主な活動：<input type="text" name="activity"></label></td>
-            <td colspan="2" rowspan="2"><label>価値提案：<input type="text" name="proposition"></label></td>
+            <td colspan="2" rowspan="2"><label>価値提案：<input type="text" name="value"></label></td>
             <td><label>顧客との関係：<input type="text" name="relationship"></label></td>
-            <td rowspan="2"><label>顧客セグメント：<input type="text" name="segment"></label></td>
+            <td rowspan="2"><label>顧客セグメント：<input type="text" name="customer"></label></td>
           </tr>
           <tr>
             <td><label>主なリソース：<input type="text" name="resource"></label></td>
@@ -39,7 +39,7 @@
           </tr>
           <tr>
             <td colspan="3"><label>コスト構造：<input type="text" name="cost"></label></td>
-            <td colspan="3"><label>収益の流れ：<input type="text" name="stream"></label></td>
+            <td colspan="3"><label>収益の流れ：<input type="text" name="revenue"></label></td>
           </tr>
         </tbody>
       </table>

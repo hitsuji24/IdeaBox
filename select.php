@@ -16,7 +16,7 @@ if($status==false) {
   while( $r = $stmt->fetch(PDO::FETCH_ASSOC)){ //データ取得数分繰り返す
     //以下でリンクの文字列を作成, $r["id"]でidをdetail.phpに渡しています
     $view .= '<a href="detail.php?id='.h($r["id"]).'">';
-    $view .= h($r["id"])."|".h($r["ideaName"])."|".h($r["segment"])."|".h($r["partner"])."|".h($r["activity"])."|".h($r["resource"])."|".h($r["channel"])."|".h($r["value"])."|".h($r["customer"])."|".h($r["cost"])."|".h($r["revenue"])."<br>";
+    $view .= h($r["id"])."|".h($r["ideaName"])."|";
     $view .= '</a>';
 
     $view .= '<a href="delete.php?id='.h($r["id"]).'">';

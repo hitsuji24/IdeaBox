@@ -1,15 +1,15 @@
 <?php
 //1. POSTデータ取得
 $ideaName = $_POST["ideaName"];
-$segment = $_POST["segment"];
+$customer = $_POST["customer"];
 $partner = $_POST["partner"];
 $activity = $_POST["activity"];
 $resource = $_POST["resource"];
 $channel = $_POST["channel"];
-$proposition = $_POST["proposition"];
+$value = $_POST["value"];
 $relationship = $_POST["relationship"];
 $cost = $_POST["cost"];
-$stream = $_POST["stream"];
+$revenue = $_POST["revenue"];
 
 //*** 外部ファイルを読み込む ***
 include("funcs.php");
@@ -29,14 +29,14 @@ $pdo = db_conn();
 
 
 //３．データ登録SQL作成
-$stmt = $pdo->prepare("INSERT INTO ib_canvas( ideaName, segment, proposition, channel, relationship, stream, resource, activity, cost, partner) VALUES( :ideaName, :segment, :proposition, :channel, :relationship, :stream, :resource, :activity, :cost, :partner)");
+$stmt = $pdo->prepare("INSERT INTO ib_canvas( ideaName, customer,value, channel, relationship, revenue, resource, activity, cost, partner) VALUES( :ideaName, :customer, :value, :channel, :relationship, :revenue, :resource, :activity, :cost, :partner)");
 
 $stmt->bindValue(':ideaName', $ideaName, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
-$stmt->bindValue(':segment', $segment, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
-$stmt->bindValue(':proposition', $proposition, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
+$stmt->bindValue(':customer', $customer, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
+$stmt->bindValue(':value', $value, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
 $stmt->bindValue(':channel', $channel, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
 $stmt->bindValue(':relationship', $relationship, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
-$stmt->bindValue(':stream', $stream, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
+$stmt->bindValue(':revenue', $revenue, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
 $stmt->bindValue(':resource', $resource, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
 $stmt->bindValue(':activity', $activity, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
 $stmt->bindValue(':cost', $cost, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
@@ -44,6 +44,7 @@ $stmt->bindValue(':partner', $partner, PDO::PARAM_STR);  //Integer（数値の�
 
 $status = $stmt->execute(); //実行
 
+var_dump($_POST);
 
 //４．データ登録処理後
 if ($status == false) {
