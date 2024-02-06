@@ -1,8 +1,13 @@
 <?php
-include("funcs.php");  //funcs.phpを読み込む（関数群）
-$pdo = db_conn();      //DB接続関数
+//0. SESSION開始！！
+session_start();
+
+//１．関数群の読み込み
+include("funcs.php");
+sschk();
 
 //２．データ登録SQL作成
+$pdo = db_conn();
 $stmt   = $pdo->prepare("SELECT * FROM ib_canvas"); //SQLをセット
 $status = $stmt->execute(); //SQLを実行→エラーの場合falseを$statusに代入
 
@@ -44,6 +49,7 @@ if($status==false) {
     <div class="container-fluid">
       <div class="navbar-header">
       <a class="navbar-brand" href="index.php">データ登録</a>
+      <a class="navbar-brand" href="logout.php">ログアウト</a>
       </div>
     </div>
   </nav>
