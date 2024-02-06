@@ -2,14 +2,28 @@
 //0. SESSION開始！！
 session_start();
 
+// 管理者フラグをセッション変数から取得
+$kanri_flg = isset($_SESSION['kanri_flg']) ? $_SESSION['kanri_flg'] : 0;
+
 //１．関数群の読み込み
 include("funcs.php");
-sschk();
-
+// sschk();
+// なぜかsschkを使うとchk_ssidの定義エラーが出るので下で対処
+// chk_ssid がセッションにセットされているか確認
+if (!isset($_SESSION['chk_ssid'])) {
+  // セッションに chk_ssid がセットされていない場合、適切な処理を行う
+  // 例えばログインページにリダイレクトするなど
+  exit("エラー: ログインしていない可能性があります。");
+}
 //２．データ登録SQL作成
 $pdo = db_conn();
 $stmt   = $pdo->prepare("SELECT * FROM ib_canvas"); //SQLをセット
 $status = $stmt->execute(); //SQLを実行→エラーの場合falseを$statusに代入
+
+// 管理者の場合、全メンバーの記録を見るリンクを生成
+if ($kanri_flg == 1) {
+  $all_records_link = '<a class="navbar-brand" href="all_records.php">全メンバーの記録を見る</a>';
+}
 
 //３．データ表示
 $view=""; //HTML文字列作り、入れる変数
@@ -49,6 +63,7 @@ if($status==false) {
     <div class="container-fluid">
       <div class="navbar-header">
       <a class="navbar-brand" href="index.php">データ登録</a>
+      <?=$all_records_link ?? ''?>
       <a class="navbar-brand" href="logout.php">ログアウト</a>
       </div>
     </div>

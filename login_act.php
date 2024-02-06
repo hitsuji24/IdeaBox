@@ -13,9 +13,10 @@ $pdo = db_conn();
 
 //2. データ登録SQL作成
 //* PasswordがHash化→条件はlidのみ！！
-$stmt = $pdo->prepare("SELECT * FROM ib_user_table WHERE lid = :lid AND lpw = :lpw"); 
+$stmt = $pdo->prepare("SELECT * FROM ib_user_table WHERE lid = :lid"); 
 $stmt->bindValue(':lid', $lid, PDO::PARAM_STR);
-$stmt->bindValue(':lpw', $lpw, PDO::PARAM_STR);
+// ハッシュ化したので16行目の中のpw一致の条件を削除、下記の部分もコメントアウト
+// $stmt->bindValue(':lpw', $lpw, PDO::PARAM_STR);
 $status = $stmt->execute();
 
 //3. SQL実行時にエラーがある場合STOP
@@ -31,8 +32,8 @@ $val = $stmt->fetch();         //1レコードだけ取得する方法
 
 //5.該当１レコードがあればSESSIONに値を代入
 //入力したPasswordと暗号化されたPasswordを比較！[戻り値：true,false]
-// $pw = password_verify($lpw, $val["lpw"]);
-if( $val['id'] != "" ){
+$pw = password_verify($lpw, $val["lpw"]);
+if($pw){
   //Login成功時
   $_SESSION["chk_ssid"]  = session_id();
   $_SESSION["kanri_flg"] = $val['kanri_flg'];

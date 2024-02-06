@@ -1,4 +1,8 @@
 <?php
+if(session_status() === PHP_SESSION_NONE) {
+    // セッションが開始されていない場合のみセッションを開始する
+    session_start();
+}
 //XSS対応（ echoする場所で使用！それ以外はNG ）
 function h($str)
 {
@@ -45,11 +49,12 @@ function redirect($file_name)
 }
 
 //SessionCheck(スケルトン)
-function sschk(){
-    if($_SESSION["chk_ssid"] != session_id()){
-      exit('LOGIN ERROR');
-    }else{
-      session_regenerate_id(true);
-      $_SESSION["chk_ssid"] = session_id();
+function sschk()
+{
+    if ($_SESSION["chk_ssid"] != session_id()) {
+        exit('LOGIN ERROR');
+    } else {
+        session_regenerate_id(true);
+        $_SESSION["chk_ssid"] = session_id();
     }
-    }
+}
